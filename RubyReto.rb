@@ -47,13 +47,14 @@ end
     end 
 
 
-
-
-     def question!
+    
+     def mix!
       @array.shuffle!
-      p @array.shift[:question]
      end 
 
+     def question!
+      @array[:question].shift
+    end 
 
 
 end 
