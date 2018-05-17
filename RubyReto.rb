@@ -5,60 +5,116 @@
 # en caso de que no le indicamos al usuario que vuelva a intentar ingresando una nueva respuesta.
 # Este es un ejemplo de como se vería el juego funcionando en la linea de comandos:
 
-# Algunas preguntas que te puedes hacer:
-# Entiendes completamente la logica del juego?
-# que clases (estado y comportamiento) necesitas?
-# Cuales son las responsabilidades de cada clase?
-# Que metodos deberían ser publicos? cuales deberian ser privados?
-
 # 1. Read Archive into hash ==> answer: xyz , question: xyz
 # 2. select random question for user
 # 3. validate answer
-    # 3a) if answer valid go back to to 
+    # 3a) if answer valid go back to to 4
     # 3b) if answer invalid, let user try again
-#4. 
-
+#4. ask next question
+#5. repeat 3
+#6. when all questions are answered, end game.
 
 
 class Game
 
-def initialize 
- @array = []
-end 
+  def initialize 
+  @array = []
+  end 
 
-
-def load_file(file)
-  if File.file?(file)
-    output = IO.readlines(file)
-    output.each do |hash|
-      question, answer = hash.chomp.split('-')
-      hash = { question: question, answer: answer }
-      @array << hash    
-    end 
-  else
-    p 'an error occured. Please speak to the administrator of this programme'
+  def load_file(file)
+    if File.file?(file)
+      output = IO.readlines(file)
+      output.each do |hash|
+        question, answer = hash.chomp.split('-')
+        hash = { question: question, answer: answer }
+        @array << hash    
+      end 
+    else
+      puts "------------------------------------------------------------------"
+      p 'an error occured. Please speak to the administrator of this programme'
+      puts "------------------------------------------------------------------"
+    end
   end
-end
 
+  def print_file(file)
+    file = load_file(file)
+    return file
+  end 
 
-    def print_file(file)
-        file = load_file(file)
-        return file
-    end 
-
-
+   
     
-     def mix!
+  def question!
+    if @array == [] || @array == nil || @array == ""
+      puts "-------------------------------------------------"
+      puts "Congratulations! You finished the game!"
+      puts "-------------------------------------------------"
+      exit
+    else 
       @array.shuffle!
-     end 
+      puts @array[0][:question]
+      while @array != ""
+        print "> "
+        respuesta = gets.chomp
+        if respuesta.downcase == @array[0][:answer] 
+          puts
+          puts "---------------------------"
+          puts "AWESOME! That is correct!"
+          puts "---------------------------"
+          puts
+          @array.shift
+          question!
 
-     def question!
-      @array[:question].shift
+          elsif respuesta.downcase == "quit"
+          puts "-------------------------------------------------"
+          puts "Goodbye my friend! Come back soon and try again!"
+          puts "-------------------------------------------------"
+          exit 
+
+          else 
+          puts "-------------------------------------------------"
+          puts "that's incorrect. Try again: "
+          puts "-------------------------------------------------"
+          puts @array[0][:question]
+        end 
+      end 
     end 
+  end
 
 
+    def menu
+      puts
+      puts
+      puts "----------Welcome to the Programming Question Game-----------"
+      puts "-----------Please be so kind and tell me your name: ----------"
+      print "> "
+      name = gets.chomp
+      puts
+      puts "Welcome #{name}"
+      puts "In case you give up just enter 'quit', comprende compadre?! Super, What do you want to do? "
+      puts "--------------------------------"
+      puts "enter 'play' to play"
+      puts "enter 'quit' to quit"
+      puts "--------------------------------"
+      print "> "
+
+      start = gets.chomp
+      if start.downcase == "quit"
+        puts
+        puts "Goodbye #{name}! Come back soon with more knowledge and try again!"
+        puts
+        exit
+      elsif start.downcase == "play"
+        puts "Lets begin"
+      else 
+        puts "#{name}, read the instruction. This is not a valid input"
+        menu()
+      end 
+    end
 end 
 
-random_question = Game.new
-random_question.print_file("archive.txt")
-random_question.question!
+
+start = Game.new
+start.print_file("archive.txt")
+start.menu
+start.question!
+

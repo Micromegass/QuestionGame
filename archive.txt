@@ -1,4 +1,10 @@
-Crear un segundo nombre para una variable metodo-alias
-Usado para definir una funcion-def
-a programming language which is developing very quickly-python
-an old programming language beginning with the ltter p-pascal
+Used to define a function in Ruby-def
+The currently fastest growing programming language-python
+An old programming language beginning with the letter P-pascal
+A place to deploy web apps-heroku
+An open source JavaScript library-redux
+Free and open source frontend library for designing websites and web applications-bootstrap
+First name of the inventor of Ruby-yukihiro
+Crossplatform JavaScript library designed to simplify the clientside scripting of HTML-jquery
+Programming Language which can be used in frontend as well as in backend-javascript
+Framework for Ruby which is not RoR-sinatra
