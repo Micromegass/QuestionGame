@@ -1,0 +1,4 @@
+Crear un segundo nombre para una variable metodo-alias
+Usado para definir una funcion-def
+a programming language which is developing very quickly-python
+an old programming language beginning with the ltter p-pascal
