@@ -47,13 +47,11 @@ end
     end 
 
 
-     def question
-      
-      @array.shuffle
-      p  @array.sample[:question]
-     
-      
 
+
+     def question!
+      @array.shuffle!
+      p @array.shift[:question]
      end 
 
 
@@ -62,4 +60,4 @@ end
 
 random_question = Game.new
 random_question.print_file("archive.txt")
-random_question.question
+random_question.question!
