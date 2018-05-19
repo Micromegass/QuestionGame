@@ -19,30 +19,11 @@ class Game
 
   def initialize 
   @array = []
+  print_file("archive.txt")
   end 
 
-  def load_file(file)
-    if File.file?(file)
-      output = IO.readlines(file)
-      output.each do |hash|
-        question, answer = hash.chomp.split('-')
-        hash = { question: question, answer: answer }
-        @array << hash    
-      end 
-    else
-      puts "------------------------------------------------------------------"
-      p 'an error occured. Please speak to the administrator of this programme'
-      puts "------------------------------------------------------------------"
-    end
-  end
 
-  def print_file(file)
-    file = load_file(file)
-    return file
-  end 
-
-   
-    
+       
   def question!
     if @array == [] || @array == nil || @array == ""
       puts "-------------------------------------------------"
@@ -66,7 +47,7 @@ class Game
 
           elsif respuesta.downcase == "quit"
           puts "-------------------------------------------------"
-          puts "Goodbye my friend! Come back soon and try again!"
+          puts "Goodbye my friend! Come back soon with more knowledge and try again!"
           puts "-------------------------------------------------"
           exit 
 
@@ -91,10 +72,10 @@ class Game
       puts
       puts "Welcome #{name}"
       puts "In case you give up just enter 'quit', comprende compadre?! Super, What do you want to do? "
-      puts "--------------------------------"
-      puts "enter 'play' to play"
-      puts "enter 'quit' to quit"
-      puts "--------------------------------"
+      puts  "--------------------------------"
+      puts  "enter 'play' to play"
+      puts  "enter 'quit' to quit"
+      puts  "--------------------------------"
       print "> "
 
       start = gets.chomp
@@ -104,7 +85,9 @@ class Game
         puts
         exit
       elsif start.downcase == "play"
+        puts 
         puts "Lets begin"
+        puts 
       else 
         puts "#{name}, read the instruction. This is not a valid input"
         menu()
@@ -112,9 +95,29 @@ class Game
     end
 end 
 
+  private 
+  def load_file(file)
+    if File.file?(file)
+      output = IO.readlines(file)
+      output.each do |hash|
+        question, answer = hash.chomp.split('-')
+        hash = { question: question, answer: answer }
+        @array << hash    
+      end 
+    else
+      puts "------------------------------------------------------------------"
+      p 'an error occured. Please speak to the administrator of this programme'
+      puts "------------------------------------------------------------------"
+    end
+  end
+
+  def print_file(file)
+    file = load_file(file)
+    return file
+  end 
+
 
 start = Game.new
-start.print_file("archive.txt")
 start.menu
 start.question!
 
